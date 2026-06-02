@@ -3,46 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивная модель космоса</title>
+    <meta name="description" content="Интерактивная 3D симуляция космических объектов: чёрные дыры, квазары и пульсары">
+    <meta name="theme-color" content="#000510">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Симулятор Космоса — Интерактивная 3D модель</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script">
 </head>
 <body>
+    <!-- Основной контейнер для 3D сцены -->
     <div id="canvas-container"></div>
     
+    <!-- Управляющая панель интерфейса -->
     <div class="ui-panel">
-        <h1>Симулятор Космоса</h1>
+        <h1>✦ Симулятор Космоса ✦</h1>
         
+        <!-- Группа контроля: выбор объекта -->
         <div class="control-group">
-            <label for="object-select">Выберите объект:</label>
+            <label for="object-select">⭐ Выберите объект:</label>
             <select id="object-select">
-                <optgroup label="Черные дыры">
+                <optgroup label="🕳️  Чёрные дыры">
                     <option value="gargantua" selected>Гаргантюа (Сверхмассивная)</option>
                     <option value="sagittarius">Стрелец А* (Центр Галактики)</option>
                 </optgroup>
-                <optgroup label="Квазары">
+                <optgroup label="💫 Квазары">
                     <option value="ton618">TON 618 (Гипермассивный)</option>
                     <option value="3c273">3C 273 (Ярчайший квазар)</option>
                 </optgroup>
-                <optgroup label="Пульсары">
+                <optgroup label="✨ Пульсары">
                     <option value="crab">Краб (Молодой пульсар)</option>
                     <option value="vela">Вела (Импульсный источник)</option>
                 </optgroup>
             </select>
         </div>
 
+        <!-- Информационный блок -->
         <div class="info-box">
             <h3 id="obj-name">Гаргантюа</h3>
-            <p id="obj-desc">Сверхмассивная чёрная дыра с гигантским светящимся аккреционным диском из газа и пыли.</p>
+            <p id="obj-desc">Загрузка информации об объекте...</p>
         </div>
 
+        <!-- Группа контроля: управление скоростью времени -->
         <div class="control-group">
-            <label for="speed-slider">Скорость времени: <span id="speed-val">1.0</span>x</label>
-            <input type="range" id="speed-slider" min="0" max="4" step="0.1" value="1">
+            <label for="speed-slider">⏱️  Скорость времени: <span id="speed-val">1.0</span>x</label>
+            <input 
+                type="range" 
+                id="speed-slider" 
+                min="0" 
+                max="4" 
+                step="0.1" 
+                value="1"
+                aria-label="Регулятор скорости симуляции"
+            >
         </div>
     </div>
 
-    <script src="js/objects.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Подсказка -->
+    <div class="tooltip">
+        💡 Дважды нажмите на экран для полноэкранного режима
+    </div>
+
+    <!-- Загрузка Three.js библиотеки -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Загрузка наших скриптов -->
+    <script src="js/objects.js" defer></script>
+    <script src="js/main.js" defer></script>
+
+    <!-- Микроразметка для SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalContent",
+      "name": "Симулятор Космоса",
+      "description": "Интерактивная 3D визуализация космических объектов: чёрных дыр, квазаров и пульсаров",
+      "keywords": "чёрная дыра, квазар, пульсар, космос, 3D симуляция, Three.js, космология",
+      "educationalLevel": "Средняя и высшая школа"
+    }
+    </script>
 </body>
 </html>

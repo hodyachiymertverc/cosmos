@@ -1,12 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #020208;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #e0e0e0;
+    background: linear-gradient(135deg, #000510 0%, #0a0e27 50%, #001a40 100%);
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    color: #e0e6ff;
 }
 
 #canvas-container {
@@ -18,123 +22,408 @@ body, html {
     z-index: 1;
 }
 
+/* ==================== UI ПАНЕЛЬ ==================== */
+
 .ui-panel {
     position: absolute;
-    top: 25px;
-    left: 25px;
+    top: 20px;
+    left: 20px;
     z-index: 10;
-    background: rgba(10, 10, 20, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(10, 15, 30, 0.85) 0%, rgba(20, 25, 50, 0.85) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(100, 150, 255, 0.3);
     border-radius: 20px;
-    padding: 25px;
-    width: 340px;
+    padding: 30px;
+    width: 360px;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 40px rgba(100, 150, 255, 0.2), 
+                0 20px 40px rgba(0, 0, 0, 0.8);
+    animation: slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .ui-panel h1 {
-    margin: 0 0 20px 0;
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    margin: 0 0 25px 0;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(100, 150, 255, 0.6),
+                 0 0 40px rgba(100, 150, 255, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #6496ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+/* ==================== КОНТРОЛЫ ==================== */
+
 .control-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     flex-shrink: 0;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #8a8a93;
-    margin-bottom: 8px;
+    letter-spacing: 1.5px;
+    color: #8a9aff;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
 select {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1.5px solid rgba(100, 150, 255, 0.4);
+    color: #ffffff;
+    padding: 13px 15px;
     border-radius: 10px;
     font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+select:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(100, 150, 255, 0.7);
+    box-shadow: 0 0 15px rgba(100, 150, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+select:focus {
+    border-color: #6496ff;
+    background: rgba(100, 150, 255, 0.15);
+    box-shadow: 0 0 25px rgba(100, 150, 255, 0.5),
+                inset 0 0 10px rgba(100, 150, 255, 0.1);
+}
+
+select optgroup {
+    background: #0d0d1a;
+    color: #ffffff;
+}
+
+select option {
+    background: #0d0d1a;
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* ==================== ИНФОРМАЦИОННЫЙ БЛОК ==================== */
+
+.info-box {
+    background: linear-gradient(135deg, rgba(100, 150, 255, 0.05) 0%, rgba(150, 100, 255, 0.05) 100%);
+    border-left: 4px solid #6496ff;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 20px;
+    margin-bottom: 25px;
+    overflow-y: auto;
+    flex-grow: 1;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 10px rgba(100, 150, 255, 0.1);
+}
+
+.info-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.info-box::-webkit-scrollbar-track {
+    background: rgba(100, 150, 255, 0.1);
+    border-radius: 3px;
+}
+
+.info-box::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6496ff, #9660ff);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.info-box::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #7aa5ff, #a85fff);
+    box-shadow: 0 0 10px rgba(100, 150, 255, 0.5);
+}
+
+.info-box h3 {
+    margin: 0 0 12px 0;
+    font-size: 19px;
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(100, 150, 255, 0.4);
+}
+
+.info-box p {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #c4d0ff;
+    text-align: justify;
+    text-indent: 0.5em;
+}
+
+/* ==================== СЛАЙДЕР ==================== */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, 
+                rgba(100, 150, 255, 0.3) 0%, 
+                rgba(150, 100, 255, 0.3) 100%);
     outline: none;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-select:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 15px rgba(74, 144, 226, 0.4);
-}
-
-select optgroup, select option {
-    background: #0d0d1a;
-    color: #fff;
-}
-
-.info-box {
-    background: rgba(255, 255, 255, 0.03);
-    border-left: 3px solid #4a90e2;
-    padding: 15px;
-    border-radius: 4px 10px 10px 4px;
-    margin-bottom: 20px;
-    overflow-y: auto; /* Добавлена прокрутка для текста */
-    flex-grow: 1;
-}
-
-/* Стилизация скроллбара */
-.info-box::-webkit-scrollbar {
-    width: 6px;
-}
-.info-box::-webkit-scrollbar-thumb {
-    background: #4a90e2;
-    border-radius: 3px;
-}
-
-.info-box h3 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    color: #fff;
-}
-
-.info-box p {
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    line-height: 1.6;
-    color: #c4c4cc;
-    text-align: justify;
-}
-
-input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.15);
-    height: 6px;
-    border-radius: 3px;
-    outline: none;
+input[type="range"]:hover {
+    background: linear-gradient(to right, 
+                rgba(100, 150, 255, 0.5) 0%, 
+                rgba(150, 100, 255, 0.5) 100%);
+    box-shadow: 0 0 15px rgba(100, 150, 255, 0.4);
 }
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: #4a90e2;
+    background: linear-gradient(135deg, #6496ff 0%, #9660ff 100%);
     cursor: pointer;
-    box-shadow: 0 0 10px #4a90e2;
-    transition: transform 0.1s;
+    box-shadow: 0 0 15px #6496ff,
+                0 0 30px rgba(100, 150, 255, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    transition: all 0.15s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 0 25px #6496ff,
+                0 0 45px rgba(100, 150, 255, 0.7),
+                inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.5);
+}
+
+input[type="range"]::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6496ff 0%, #9660ff 100%);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px #6496ff,
+                0 0 30px rgba(100, 150, 255, 0.5);
+    transition: all 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 25px #6496ff,
+                0 0 45px rgba(100, 150, 255, 0.7);
+}
+
+/* ==================== СОВЕТ (TOOLTIP) ==================== */
+
+.tooltip {
+    display: none;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(100, 150, 255, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 11;
+    pointer-events: none;
+    animation: slideUp 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== АДАПТИВНОСТЬ ==================== */
+
+@media (max-width: 768px) {
+    .ui-panel {
+        width: 85vw;
+        max-width: 320px;
+        left: 10px;
+        right: 10px;
+        padding: 20px;
+    }
+
+    .ui-panel h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    .control-group {
+        margin-bottom: 15px;
+    }
+
+    .info-box {
+        margin-bottom: 15px;
+        max-height: 200px;
+    }
+
+    label {
+        font-size: 10px;
+    }
+
+    select {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .info-box p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    .ui-panel {
+        width: 90vw;
+        padding: 15px;
+        border-radius: 15px;
+        max-height: 75vh;
+    }
+
+    .ui-panel h1 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .control-group {
+        margin-bottom: 12px;
+    }
+
+    .info-box {
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        max-height: 150px;
+    }
+
+    .info-box h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    label {
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
+
+    select {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    .info-box p {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+}
+
+/* ==================== ОБЩИЕ ЭФФЕКТЫ ==================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(100, 150, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6496ff, #9660ff);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #7aa5ff, #a85fff);
+}
+
+/* Скрытие скроллбара во время скролла контейнера */
+.info-box::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Глубина резкости для интерфейса */
+@supports (backdrop-filter: blur(1px)) {
+    .ui-panel {
+        -webkit-backdrop-filter: blur(25px);
+        backdrop-filter: blur(25px);
+    }
+}
+
+/* Поддержка тёмного режима */
+@media (prefers-color-scheme: dark) {
+    body, html {
+        background: linear-gradient(135deg, #000000 0%, #0a0e27 50%, #001a40 100%);
+    }
+}
+
+/* Уменьшение анимаций для пользователей с prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Фокус для клавиатуры */
+select:focus-visible {
+    outline: 3px solid #6496ff;
+    outline-offset: 2px;
+}
+
+input[type="range"]:focus-visible {
+    outline: 3px solid #6496ff;
+    outline-offset: 2px;
 }
