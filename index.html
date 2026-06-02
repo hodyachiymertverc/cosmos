@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная модель космоса</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="ui-panel">
+        <h1>Симулятор Космоса</h1>
+        
+        <div class="control-group">
+            <label for="object-select">Выберите объект:</label>
+            <select id="object-select">
+                <optgroup label="Черные дыры">
+                    <option value="gargantua" selected>Гаргантюа (Сверхмассивная)</option>
+                    <option value="sagittarius">Стрелец А* (Центр Галактики)</option>
+                </optgroup>
+                <optgroup label="Квазары">
+                    <option value="ton618">TON 618 (Гипермассивный)</option>
+                    <option value="3c273">3C 273 (Ярчайший квазар)</option>
+                </optgroup>
+                <optgroup label="Пульсары">
+                    <option value="crab">Краб (Молодой пульсар)</option>
+                    <option value="vela">Вела (Импульсный источник)</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="info-box">
+            <h3 id="obj-name">Гаргантюа</h3>
+            <p id="obj-desc">Сверхмассивная чёрная дыра с гигантским светящимся аккреционным диском из газа и пыли.</p>
+        </div>
+
+        <div class="control-group">
+            <label for="speed-slider">Скорость времени: <span id="speed-val">1.0</span>x</label>
+            <input type="range" id="speed-slider" min="0" max="4" step="0.1" value="1">
+        </div>
+    </div>
+
+    <script src="js/objects.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
